@@ -19,6 +19,7 @@
       <nav>
         <a href="#features">Features</a>
         <a href="#screens">Screens</a>
+        <a href="#beta">Request invite</a>
         <a href="privacy.html">Privacy</a>
       </nav>
     </div>
@@ -31,7 +32,7 @@
           <h1>Your news, as a <span class="accent">podcast</span>.</h1>
           <p class="lead">damabot turns the topics, sources and voice you choose into personalized
           podcast episodes — generated for you, ready whenever you are.</p>
-          <a class="cta" href="#features">See how it works →</a>
+          <a class="cta" href="#beta">Request a TestFlight invite →</a>
           <span class="cta-note">In private beta on TestFlight. iPhone, iOS 17+.</span>
         </div>
         <div class="hero-shot">
@@ -47,32 +48,26 @@
         write and narrate fresh episodes.</p>
         <div class="features">
           <div class="feature">
-            <div class="ic">🎙️</div>
             <h3>Your own channels</h3>
             <p>Make a channel for any subject — world news, tech, your hometown, a hobby — and pick the sources it should follow.</p>
           </div>
           <div class="feature">
-            <div class="ic">✨</div>
             <h3>Generated for you</h3>
             <p>Each episode is researched, written and narrated on demand, in the length and style you set.</p>
           </div>
           <div class="feature">
-            <div class="ic">🗣️</div>
-            <h3>Your voice & language</h3>
+            <h3>Your voice &amp; language</h3>
             <p>Choose the language and a natural-sounding voice. Add house-style rules that apply to every episode.</p>
           </div>
           <div class="feature">
-            <div class="ic">📡</div>
-            <h3>Explore & discover</h3>
+            <h3>Explore &amp; discover</h3>
             <p>Publish a channel for others, or browse channels people share in Explore — organized by category.</p>
           </div>
           <div class="feature">
-            <div class="ic">⤓</div>
             <h3>Listen offline</h3>
             <p>Download episodes to your device and play them anywhere, with no connection needed.</p>
           </div>
           <div class="feature">
-            <div class="ic">🔒</div>
             <h3>Private by design</h3>
             <p>No ads, no tracking. Sign in with Apple, and your email is never shown to anyone.</p>
           </div>
@@ -96,6 +91,26 @@
         </div>
       </div>
     </section>
+
+    <section id="beta">
+      <div class="wrap">
+        <h2 class="section-title">Request a TestFlight invite</h2>
+        <p class="section-sub">damabot is in private beta. Leave your details and we'll send you a TestFlight invite for iPhone.</p>
+        <form class="beta-form" id="betaForm" action="https://formsubmit.co/contact@m-services.ch" method="POST">
+          <input type="hidden" name="_subject" value="damabot TestFlight request" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="row">
+            <label>Name<input type="text" name="name" required /></label>
+            <label>Email (your Apple ID)<input type="email" name="email" required /></label>
+          </div>
+          <label>Anything we should know? <span style="font-weight:400;color:var(--muted)">(optional)</span>
+            <textarea name="note" rows="3"></textarea></label>
+          <button type="submit" class="cta">Request invite</button>
+          <p class="form-note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -105,5 +120,33 @@
       <span class="sp">damabot — your news, as a podcast.</span>
     </div>
   </footer>
+
+  <script>
+    // Submit the beta request without leaving the page (FormSubmit AJAX endpoint).
+    // Falls back to a normal POST (the form's action) if JavaScript is disabled.
+    document.getElementById('betaForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var form = e.target, note = document.getElementById('formNote');
+      if (form._honey.value) return;            // honeypot: ignore bots
+      note.className = 'form-note'; note.textContent = 'Sending…';
+      try {
+        var res = await fetch('https://formsubmit.co/ajax/contact@m-services.ch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: form.name.value, email: form.email.value, note: form.note.value,
+            _subject: 'damabot TestFlight request'
+          })
+        });
+        if (!res.ok) throw new Error();
+        form.reset();
+        note.className = 'form-note ok';
+        note.textContent = 'Thanks! We got your request and will send your TestFlight invite soon.';
+      } catch (_) {
+        note.className = 'form-note err';
+        note.textContent = 'Something went wrong — please email contact@m-services.ch directly.';
+      }
+    });
+  </script>
 </body>
 </html>
