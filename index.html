@@ -96,7 +96,7 @@
       <div class="wrap">
         <h2 class="section-title">Request a TestFlight invite</h2>
         <p class="section-sub">damabot is in private beta. Leave your details and we'll send you a TestFlight invite for iPhone.</p>
-        <form class="beta-form" id="betaForm" action="https://formsubmit.co/contact@m-services.ch" method="POST">
+        <form class="beta-form" id="betaForm" action="https://formsubmit.co/f3837d2e22599718520ee9d4a3652b2a" method="POST">
           <input type="hidden" name="_subject" value="damabot TestFlight request" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -138,7 +138,7 @@
       if (form._honey.value) return;            // honeypot: ignore bots
       note.className = 'form-note'; note.textContent = 'Sending…';
       try {
-        var res = await fetch('https://formsubmit.co/ajax/contact@m-services.ch', {
+        var res = await fetch('https://formsubmit.co/ajax/f3837d2e22599718520ee9d4a3652b2a', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
