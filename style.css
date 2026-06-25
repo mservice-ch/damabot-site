@@ -54,6 +54,10 @@ a { color: var(--accent-strong); }
   font-weight: 600; padding: 13px 22px; border-radius: 999px; box-shadow: 0 8px 22px rgba(100,116,136,0.35); }
 .cta:hover { background: var(--accent-strong); }
 .cta-note { display: block; margin-top: 12px; font-size: 13px; color: var(--muted); }
+.cta-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.cta-secondary { background: transparent; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; }
+.cta-secondary:hover { background: var(--accent); color: #fff; }
+.nav-webapp { background: var(--accent); color: #fff !important; padding: 6px 14px; border-radius: 999px; font-size: 14px !important; }
 
 .hero-shot { justify-self: center; }
 .phone { width: 270px; max-width: 70vw; border-radius: 38px; padding: 9px; background: #111418;
